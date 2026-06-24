@@ -3,6 +3,7 @@ import {
  createRedisWrapper,
  decrypt,
  getBotIdFromToken,
+ resolveRedisHost,
  SatelliteChannel,
  type RedisWrapperInterface,
  type ScopedLogger,
@@ -47,8 +48,9 @@ export default class Manager {
   this.prisma = options.prisma;
   this.logger = options.logger;
   this.local = options.local;
-  this.pub = createRedisWrapper({ db: redisDb });
-  this.control = createRedisWrapper({ db: redisDb });
+  const host = resolveRedisHost(this.local);
+  this.pub = createRedisWrapper({ db: redisDb, host });
+  this.control = createRedisWrapper({ db: redisDb, host });
  }
 
  start = async (): Promise<void> => {
