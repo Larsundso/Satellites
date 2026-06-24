@@ -1,0 +1,48 @@
+{
+  "name": "@ayako/satellites",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "swc src -d dist --strip-leading-paths --copy-files",
+    "typecheck": "tsc --noEmit",
+    "dev": "pnpm build && node --enable-source-maps ./dist/index.js --local",
+    "lint": "eslint src --fix",
+    "run": "node ./dist/index.js",
+    "start": "pnpm run run",
+    "watch": "swc src -d dist --strip-leading-paths --copy-files --watch"
+  },
+  "dependencies": {
+    "@ayako/database": "workspace:*",
+    "@ayako/utility": "workspace:*",
+    "@discordjs/rest": "^2.6.1",
+    "@discordjs/ws": "^2.0.4",
+    "@prisma/adapter-pg": "^7.8.0",
+    "discord-api-types": "0.38.49",
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^2.1.0",
+    "@eslint/js": "^10.0.1",
+    "@swc/cli": "^0.8.1",
+    "@swc/core": "1.15.43",
+    "@total-typescript/ts-reset": "^0.6.1",
+    "@types/node": "^26.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.62.0",
+    "@typescript-eslint/parser": "^8.62.0",
+    "eslint": "^10.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.5",
+    "eslint-plugin-import-x": "^4.17.0",
+    "eslint-plugin-prettier": "^5.5.6",
+    "globals": "^17.7.0",
+    "prettier": "^3.8.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.62.0"
+  },
+  "packageManager": "pnpm@11.8.0",
+  "engines": {
+    "node": "^25.6.0",
+    "pnpm": "^11.6.0"
+  }
+}
