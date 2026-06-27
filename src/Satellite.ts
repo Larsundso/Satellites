@@ -85,7 +85,7 @@ export default class Satellite {
 
  private onDispatch = (payload: GatewayDispatchPayload): void => {
   if (!forwardedEvents.has(payload.t)) return;
-  this.manager.publish(payload.t, JSON.stringify(payload.d));
+  this.manager.publish(payload.t, JSON.stringify({ ...payload.d, recipientId: this.botId }));
  };
 
  private onClosed = (code: number): void => {
