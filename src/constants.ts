@@ -9,6 +9,7 @@ export const forwardedEvents = new Set<GatewayDispatchEvents>([
  GatewayDispatchEvents.MessageCreate,
  GatewayDispatchEvents.MessageUpdate,
  GatewayDispatchEvents.MessageDelete,
+ GatewayDispatchEvents.InteractionCreate,
 ]);
 
 export const reconcileDebounceMs = 1000;

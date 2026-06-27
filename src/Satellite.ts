@@ -3,6 +3,7 @@ import { REST } from "@discordjs/rest";
 import { WebSocketManager, WebSocketShardEvents } from "@discordjs/ws";
 import {
  GatewayCloseCodes,
+ GatewayDispatchEvents,
  GatewayOpcodes,
  type GatewayDispatchPayload,
  type GatewayPresenceUpdateData,
@@ -85,7 +86,13 @@ export default class Satellite {
 
  private onDispatch = (payload: GatewayDispatchPayload): void => {
   if (!forwardedEvents.has(payload.t)) return;
-  this.manager.publish(payload.t, JSON.stringify({ ...payload.d, recipientId: this.botId }));
+
+  const data =
+   payload.t === GatewayDispatchEvents.InteractionCreate
+    ? payload.d
+    : { ...payload.d, recipientId: this.botId };
+
+  this.manager.publish(payload.t, JSON.stringify(data));
  };
 
  private onClosed = (code: number): void => {
