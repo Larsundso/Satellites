@@ -136,9 +136,11 @@ export default class Manager {
  };
 
  private buildDesired = async (): Promise<Map<string, DesiredBot>> => {
-  const rows = await this.prisma.ticketSetting.findMany({
-   where: { botToken: { not: null } },
-  });
+  const [ticketRows, welcomeRows] = await Promise.all([
+   this.prisma.ticketSetting.findMany({ where: { botToken: { not: null } } }),
+   this.prisma.welcomeSetting.findMany({ where: { botToken: { not: null } } }),
+  ]);
+  const rows = [...ticketRows, ...welcomeRows];
   const desired = new Map<string, DesiredBot>();
 
   for (const row of rows) {
